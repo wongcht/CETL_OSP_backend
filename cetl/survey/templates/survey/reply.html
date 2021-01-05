@@ -13,7 +13,7 @@
 
         {% for q in questions %}
 
-        {{ forloop.counter }}. {{q.prompt}}
+        <strong>{{forloop.counter}}. </strong>{{q.prompt}}
 
             {% if q.input_type == "t" %}
                 <textarea class="form-control" name="{{q.pk}}" required></textarea>
@@ -23,7 +23,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="{{q.pk}}" id="radio_{{q.pk}}_{{option.0}}" value="{{option.0}}" required>
                     <label class="form-check-label" for="radio_{{q.pk}}_{{option.0}}">
-                        {{option.1}}
+                        <strong>{{option.0}}. </strong>{{option.1}}
                     </label>
                   </div>
                 <!-- <input type="radio" name="{{q.pk}}" value="{{option.0}}"> -->
