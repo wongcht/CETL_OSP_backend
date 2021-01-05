@@ -21,8 +21,6 @@ def index_redirect(request):
 def index(request):
     return render(request, "survey/index.html", locals())
 
-
-
 def reply(request, token):
     survey = get_object_or_404(Survey, token=token)    
     if request.method == "POST":
@@ -38,6 +36,7 @@ def reply(request, token):
         questions = Question.objects.filter(survey=survey)
         return render(request, "survey/reply.html", locals())
 
+@login_required
 def survey_edit(request, token):
     survey = get_object_or_404(Survey, token=token)
     questions = Question.objects.filter(survey=survey)
