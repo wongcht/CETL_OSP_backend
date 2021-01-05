@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3 class="text-center">CETL Survey</h3>
+
+<h6>Welcome to CETL Survey Platform. To complete the survey, please enter the survey token (case-sensitive) below: </h6>
+
+    <div class="text-center">
+        <input class="form-control" type="text" placeholder="5 Character Token" maxlength="5" id="token" required>    
+        <br>
+        <button class="btn btn-primary" type="button" id="check_token">Go to Survey</button>        
+    </div>
+
+    <script>
+            $("#check_token").click(function () {
+                const token = $("#token").val()
+                if (token.length != 5) {
+                    alert("Please Enter 5 Character Token!");
+                } else {
+                    axios.get(`/api/surveys/${token}/`).then(function (response) {
+                        // handle success
+                        if (response.status == 200) {
+                            window.location.replace(`/survey/${token}/`);
+                        }
+                        // console.log(response);
+                    })
+                        .catch(function (error) {
+                            if (error.response.status == 404) {
+                                alert("The token is invalid. Please enter the correct token.")
+                            }
+                            // handle error
+                            // console.log(error);
+                        })
+                        .then(function () {
+                            // always executed
+                        });
+                }
+            })
+    </script>
+
+
+
+{% endblock  %}

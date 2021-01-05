@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h3 class="text-center">Survey List</h3>
+
+    <div class="alert alert-info" role="alert">
+        If you have done any changes, please remember to refresh the page to view updated survey.
+    </div>
+
+    <table class="table">
+        <!-- <thead>
+            <tr>
+                <th>Token</th>
+                <th>Title</th>
+
+            </tr>
+        </thead> -->
+        <tbody>
+            {% for survey in surveys %}
+            <tr>
+                <td>{{survey.token}} (ID: {{survey.pk}}) <br>
+                    <strong>{{survey.title}}</strong> <br>
+                    <small><a href="/survey/{{survey.token}}/" target="_blank">View</a></small> | 
+                    <small><a href="/survey/{{survey.token}}/edit/" target="_blank">Edit</a></small> | 
+                    <small><a href="/survey/{{survey.token}}/summary/" target="_blank">Summary</a></small> |
+                    <small><a href="/admin/survey/survey/{{survey.pk}}/delete/" target="_blank">Delete</a></small>
+                </td>
+            </tr>
+            {% endfor %}            
+        </tbody>
+    </table>
+
+    <hr>
+
+    <a href="/admin/survey/survey/add/" target="_blank" class="btn btn-primary" role="button">New Survey</a>
+
+{% endblock  %}
+
+

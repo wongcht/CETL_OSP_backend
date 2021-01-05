@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}{{survey.title}} (Token: {{survey.token}}) - {% endblock  %}
+
+{% block content %}
+    <h3 class="text-center">{{survey.title}}</h3>
+
+
+    
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% for q in questions %}
+
+        {{ forloop.counter }}. {{q.prompt}}
+
+            {% if q.input_type == "t" %}
+                <textarea class="form-control" name="{{q.pk}}" required></textarea>
+            {% elif q.input_type == "m" %}
+
+                {% for option in q.mc_choices %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="{{q.pk}}" id="radio_{{q.pk}}_{{option.0}}" value="{{option.0}}" required>
+                    <label class="form-check-label" for="radio_{{q.pk}}_{{option.0}}">
+                        {{option.1}}
+                    </label>
+                  </div>
+                <!-- <input type="radio" name="{{q.pk}}" value="{{option.0}}"> -->
+
+                {% endfor %}
+
+            {% endif %}
+
+
+        <hr>
+
+
+
+        {% endfor %}
+        
+            <input type="submit" class="form-control btn btn-success" value="Submit">
+                  
+    </form>
+
+{% endblock  %}
+
+

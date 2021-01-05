@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h3>Thanks for your reply! This page will be redirected to main page in 3 seconds.</h3>
+    <script>
+        setTimeout(function(){ window.location.replace("/"); }, 3000);
+    </script>
+
+{% endblock  %}
+
+
